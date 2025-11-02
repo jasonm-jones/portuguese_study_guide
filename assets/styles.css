@@ -1,0 +1,241 @@
+/* Portuguese Study Guide - Shared Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #1a202c;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    color: white;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+    color: #a78bfa;
+}
+
+header p {
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+/* Navigation */
+.breadcrumb {
+    background: #2d3748;
+    padding: 15px 40px;
+    border-bottom: 2px solid #4a5568;
+}
+
+.breadcrumb a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #a78bfa;
+}
+
+/* Content Area */
+.content {
+    padding: 40px;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h2 {
+    color: #a78bfa;
+    font-size: 2em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #7c3aed;
+}
+
+h3 {
+    color: #cbd5e0;
+    font-size: 1.5em;
+    margin: 25px 0 15px 0;
+}
+
+h4 {
+    color: #e2e8f0;
+    font-size: 1.2em;
+    margin: 20px 0 10px 0;
+}
+
+/* Content Boxes */
+.grammar-box {
+    background: #2d3748;
+    border-left: 5px solid #7c3aed;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.example {
+    background: #2d3748;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border-left: 4px solid #60a5fa;
+}
+
+.tip-box {
+    background: #44403c;
+    padding: 15px;
+    border-left: 4px solid #fbbf24;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+.rule-box {
+    background: #1e3a2e;
+    padding: 15px;
+    border-left: 4px solid #34d399;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #2d3748;
+    overflow-x: auto;
+    display: block;
+}
+
+table tbody {
+    display: table;
+    width: 100%;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #4a5568;
+    color: #e2e8f0;
+}
+
+th {
+    background: #7c3aed;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background: #374151;
+}
+
+/* Exercises */
+.exercise {
+    background: #44403c;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 4px solid #fb923c;
+}
+
+.exercise ol, .exercise ul {
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+.exercise li {
+    margin: 8px 0;
+}
+
+.answer-key {
+    background: #1e3a2e;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border-left: 4px solid #34d399;
+}
+
+/* Special Text */
+.accent-example {
+    font-size: 1.5em;
+    color: #a78bfa;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.syllable-break {
+    color: #f87171;
+}
+
+strong {
+    color: #a78bfa;
+}
+
+/* Lists */
+ul, ol {
+    color: #e2e8f0;
+    margin-left: 20px;
+}
+
+li {
+    margin: 5px 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        border-radius: 10px;
+    }
+    
+    header, .content {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+    
+    .breadcrumb {
+        padding: 10px 20px;
+    }
+    
+    table {
+        font-size: 0.9em;
+    }
+    
+    th, td {
+        padding: 8px;
+    }
+}

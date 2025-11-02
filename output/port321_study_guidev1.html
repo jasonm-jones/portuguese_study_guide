@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORT 321 - Guia de Estudo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #1a202c;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            max-width: 100%;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        header p {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+        
+        .main-layout {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #2d3748;
+            border-right: 3px solid #4a5568;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #718096;
+            border-radius: 4px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+        }
+        
+        .nav-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #cbd5e0;
+            transition: all 0.3s;
+            text-align: left;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-section-header {
+            padding: 15px 20px 10px 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #4a5568;
+            margin-top: 10px;
+        }
+        
+        .nav-section-header:first-child {
+            margin-top: 0;
+        }
+        
+        .nav-tab:hover {
+            background: #4a5568;
+            border-left-color: #7c3aed;
+            color: #f7fafc;
+        }
+        
+        .nav-tab.active {
+            background: #4a5568;
+            color: #a78bfa;
+            border-left-color: #a78bfa;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        .content * {
+            max-width: 100%;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #a78bfa;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #7c3aed;
+        }
+        
+        .section h3 {
+            color: #cbd5e0;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .section h4 {
+            color: #e2e8f0;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+        
+        .grammar-box {
+            background: #2d3748;
+            border-left: 5px solid #7c3aed;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .example {
+            background: #2d3748;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #60a5fa;
+        }
+        
+        .tip-box {
+            background: #44403c;
+            padding: 15px;
+            border-left: 4px solid #fbbf24;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .rule-box {
+            background: #1e3a2e;
+            padding: 15px;
+            border-left: 4px solid #34d399;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #2d3748;
+            display: block;
+            overflow-x: auto;
+        }
+        
+        table tbody {
+            display: table;
+            width: 100%;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #4a5568;
+            color: #e2e8f0;
+        }
+        
+        th {
+            background: #7c3aed;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background: #374151;
+        }
+        
+        .exercise {
+            background: #44403c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #fb923c;
+        }
+        
+        .exercise ol, .exercise ul {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .exercise li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        .answer-key {
+            background: #1e3a2e;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #34d399;
+        }
+        
+        .accent-example {
+            font-size: 1.5em;
+            color: #a78bfa;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .syllable-break {
+            color: #f87171;
+        }
+        
+        strong {
+            color: #a78bfa;
+        }
+        
+        p, li {
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        
+        ul, ol {
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇵🇹 PORT 321 - Guia de Estudo</h1>
+            <p>Língua Portuguesa e Cultura</p>
+        </header>
+        
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="nav-tabs">
+                    <div class="nav-section-header">📚 Midterm 1</div>
+                    <button class="nav-tab active" data-tab="acentuacao">Acentuação</button>
+                    <button class="nav-tab" data-tab="genero">Gênero (Substantivos)</button>
+                    <button class="nav-tab" data-tab="plural">Plural (Substantivos)</button>
+                    <button class="nav-tab" data-tab="adverbios">Advérbios</button>
+                    <button class="nav-tab" data-tab="porques">Porquês</button>
+                    <button class="nav-tab" data-tab="presente">Presente do Indicativo</button>
+                    <button class="nav-tab" data-tab="verbos-passado">Pretérito (Perfeito/Imperfeito)</button>
+                    <button class="nav-tab" data-tab="participio">Particípio</button>
+                    
+                    <div class="nav-section-header">📖 Midterm 2</div>
+                    <button class="nav-tab" data-tab="preposicoes">Preposições</button>
+                    <button class="nav-tab" data-tab="regencia">Regência</button>
+                    <button class="nav-tab" data-tab="subjuntivo">Subjuntivo</button>
+                    <button class="nav-tab" data-tab="imperativo">Imperativo</button>
+                    <button class="nav-tab" data-tab="pronomes">Pronomes</button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <!-- ACENTUAÇÃO -->
+                <div id="acentuacao" class="tab-content active">
+                    <div class="section">
+                        <h2>Acentuação Gráfica</h2>
+                        
+                        <h3>Classificação das Palavras quanto à Tonicidade</h3>
+                        
+                        <div class="grammar-box">
+                            <p>As palavras em português são classificadas de acordo com a posição da sílaba tônica (a sílaba mais forte):</p>
+                        </div>
+                        
+                        <h3>1. Oxítonas</h3>
+                        <div class="rule-box">
+                            <p><strong>Definição:</strong> Palavras cuja sílaba tônica é a última.</p>
+                            
+                            <h4>Quando acentuar:</h4>
+                            <p>Acentuam-se as oxítonas terminadas em:</p>
+                            <ul>
+                                <li><strong>A(S):</strong> sofá, Pará, atrás, guardará</li>
+                                <li><strong>E(S):</strong> café, você, português, José</li>
+                                <li><strong>O(S):</strong> avó, avô, cipós, após</li>
+                                <li><strong>EM, ENS:</strong> também, alguém, parabéns, armazéns</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <p class="accent-example">ca<span class="syllable-break">-</span>fé</p>
+                            <p class="accent-example">Pa<span class="syllable-break">-</span>rá</p>
+                            <p class="accent-example">a<span class="syllable-break">-</span>vô</p>
+                            <p class="accent-example">tam<span class="syllable-break">-</span>bém</p>
+                            <p class="accent-example">pa<span class="syllable-break">-</span>ra<span class="syllable-break">-</span>béns</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Nota:</strong> Oxítonas terminadas em -i(s) ou -u(s) NÃO levam acento:
+                            <ul>
+                                <li>caqui, javali, Bangu, urubu</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>2. Paroxítonas</h3>
+                        <div class="rule-box">
+                            <p><strong>Definição:</strong> Palavras cuja sílaba tônica é a penúltima.</p>
+                            
+                            <h4>Quando acentuar:</h4>
+                            <p>Acentuam-se as paroxítonas terminadas em:</p>
+                            <ul>
+                                <li><strong>L:</strong> fácil, útil, amável, túnel</li>
+                                <li><strong>N:</strong> hífen, pólen, abdômen</li>
+                                <li><strong>R:</strong> açúcar, mártir, caráter</li>
+                                <li><strong>X:</strong> tórax, látex, fênix</li>
+                                <li><strong>PS:</strong> bíceps, fórceps</li>
+                                <li><strong>Ã(S), ÃO(S):</strong> órfã, ímã, órgão, órfãos</li>
+                                <li><strong>I(S):</strong> júri, lápis, grátis</li>
+                                <li><strong>US:</strong> bônus, vírus, Vênus</li>
+                                <li><strong>UM, UNS:</strong> álbum, fórum, álbuns</li>
+                                <li><strong>Ditongo oral:</strong> história, série, água, mágoa</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <p class="accent-example">fá<span class="syllable-break">-</span>cil</p>
+                            <p class="accent-example">a<span class="syllable-break">-</span>çú<span class="syllable-break">-</span>car</p>
+                            <p class="accent-example">tó<span class="syllable-break">-</span>rax</p>
+                            <p class="accent-example">ór<span class="syllable-break">-</span>fã</p>
+                            <p class="accent-example">his<span class="syllable-break">-</span>tó<span class="syllable-break">-</span>ria</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Importante:</strong> Paroxítonas terminadas em -A(S), -E(S), -O(S), -EM/-ENS NÃO levam acento:
+                            <ul>
+                                <li>casa, casas, come, comer, povo, jovem, homens</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>Ditongos Crescentes</h4>
+                        <div class="grammar-box">
+                            <p><strong>O que são ditongos crescentes?</strong></p>
+                            <p>Ditongos crescentes são encontros vocálicos formados por uma semivogal seguida de uma vogal (crescem em intensidade). As combinações são:</p>
+                            <ul>
+                                <li><strong>ia, ie, io, ua, ue, uo</strong></li>
+                            </ul>
+                            
+                            <p style="margin-top: 15px;"><strong>Regra importante:</strong> Palavras paroxítonas terminadas em ditongo crescente (oral) são acentuadas.</p>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>Exemplos de palavras acentuadas com ditongos crescentes:</h4>
+                            <p><strong>-ia:</strong> his<strong>tó</strong>ria, glória, colônia, memória</p>
+                            <p><strong>-ie:</strong> sé<strong>rie</strong>, espécie, barbárie</p>
+                            <p><strong>-io:</strong> pré<strong>mio</strong>, ginásio, próprio</p>
+                            <p><strong>-ua:</strong> á<strong>gua</strong>, língua, tênue</p>
+                            <p><strong>-ue:</strong> tê<strong>nue</strong>, vácuo</p>
+                            <p><strong>-uo:</strong> vá<strong>cuo</strong>, árduo, mútuo</p>
+                        </div>
+                        
+                        <div class="rule-box">
+                            <h4>Atenção especial:</h4>
+                            <p>Alguns gramáticos consideram que essas palavras podem ser tanto <strong>paroxítonas</strong> (com ditongo crescente) quanto <strong>proparoxítonas</strong> (com hiato):</p>
+                            <ul>
+                                <li>his-<strong>tó</strong>-ria (paroxítona com ditongo: his-TÓ-ria)</li>
+                                <li>his-<strong>tó</strong>-ri-a (proparoxítona com hiato: his-TÓ-ri-a)</li>
+                            </ul>
+                            <p style="margin-top: 10px;">De qualquer forma, <strong>todas levam acento!</strong></p>
+                        </div>
+                        
+                        <h3>3. Proparoxítonas</h3>
+                        <div class="rule-box">
+                            <p><strong>Definição:</strong> Palavras cuja sílaba tônica é a antepenúltima.</p>
+                            
+                            <h4>Regra de ouro:</h4>
+                            <p><strong>TODAS as proparoxítonas são acentuadas!</strong></p>
+                            
+                            <ul>
+                                <li><strong>Exemplos:</strong> matemática, física, música, pássaro, lâmpada, sílaba, crítico, médico, público, América, rápido</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <p class="accent-example">má<span class="syllable-break">-</span>qui<span class="syllable-break">-</span>na</p>
+                            <p class="accent-example">mé<span class="syllable-break">-</span>di<span class="syllable-break">-</span>co</p>
+                            <p class="accent-example">pás<span class="syllable-break">-</span>sa<span class="syllable-break">-</span>ro</p>
+                            <p class="accent-example">lâm<span class="syllable-break">-</span>pa<span class="syllable-break">-</span>da</p>
+                            <p class="accent-example">sí<span class="syllable-break">-</span>la<span class="syllable-break">-</span>ba</p>
+                        </div>
+                        
+                        <h3>4. Hiatos</h3>
+                        <div class="rule-box">
+                            <p><strong>Definição:</strong> Hiato é o encontro de duas vogais que pertencem a <strong>sílabas diferentes</strong>. As vogais não formam ditongo; cada uma fica em uma sílaba separada.</p>
+                            
+                            <div class="example" style="margin-top: 15px; background: #1e3a2e;">
+                                <p><strong>Exemplos de separação silábica:</strong></p>
+                                <p>sa-<strong>í</strong>-da (3 sílabas: i e a estão separados)</p>
+                                <p>pa-<strong>ís</strong> (2 sílabas: i e a estão separados)</p>
+                                <p>sa-<strong>ú</strong>-de (3 sílabas: u e e estão separados)</p>
+                                <p>ba-<strong>ú</strong> (2 sílabas: u e a estão separados)</p>
+                            </div>
+                            
+                            <h4 style="margin-top: 20px;">Quando acentuar:</h4>
+                            <p>Acentuam-se o <strong>I</strong> e o <strong>U</strong> tônicos quando:</p>
+                            <ul>
+                                <li>Formam hiato com a vogal anterior (estão em sílabas diferentes)</li>
+                                <li>Estão sozinhos na sílaba ou seguidos de -S</li>
+                                <li>Não são seguidos de NH</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>Com acento:</h4>
+                            <p class="accent-example">sa<span class="syllable-break">-</span>í<span class="syllable-break">-</span>da</p>
+                            <p class="accent-example">pa<span class="syllable-break">-</span>ís</p>
+                            <p class="accent-example">sa<span class="syllable-break">-</span>ú<span class="syllable-break">-</span>de</p>
+                            <p class="accent-example">ba<span class="syllable-break">-</span>ú</p>
+                            <p class="accent-example">fa<span class="syllable-break">-</span>ís<span class="syllable-break">-</span>ca</p>
+                            <p class="accent-example">e<span class="syllable-break">-</span>go<span class="syllable-break">-</span>ís<span class="syllable-break">-</span>ta</p>
+                            
+                            <h4 style="margin-top: 20px;">Sem acento:</h4>
+                            <p class="accent-example">ra<span class="syllable-break">-</span>i<span class="syllable-break">-</span>nha (seguido de NH)</p>
+                            <p class="accent-example">ru<span class="syllable-break">-</span>im (I seguido de M)</p>
+                            <p class="accent-example">ca<span class="syllable-break">-</span>ir (I não está sozinho na sílaba)</p>
+                        </div>
+                        
+                        <h3>Tabela Resumo</h3>
+                        <table>
+                            <tr>
+                                <th style="width: 15%;">Classificação</th>
+                                <th style="width: 15%;">Sílaba Tônica</th>
+                                <th style="width: 35%;">Quando acentuar</th>
+                                <th style="width: 35%;">Exemplos</th>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #60a5fa;">Oxítona</strong></td>
+                                <td>Última</td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        A(S)<br>
+                                        E(S)<br>
+                                        O(S)<br>
+                                        EM, ENS
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        café, sofá<br>
+                                        você, José<br>
+                                        avô, avó<br>
+                                        também, parabéns
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #a78bfa;">Paroxítona</strong></td>
+                                <td>Penúltima</td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        L, N, R, X, PS<br>
+                                        Ã(S), ÃO(S)<br>
+                                        I(S), US<br>
+                                        UM/UNS<br>
+                                        ditongo oral
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        fácil, açúcar, tórax<br>
+                                        órfã, órgão<br>
+                                        júri, lápis, vírus<br>
+                                        álbum, fórum<br>
+                                        história, água
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #34d399;">Proparoxítona</strong></td>
+                                <td>Antepenúltima</td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        <strong style="color: #34d399;">SEMPRE</strong><br>
+                                        (todas são acentuadas)
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        máquina, médico<br>
+                                        lâmpada, música<br>
+                                        pássaro, crítico
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #fbbf24;">Hiato (I, U)</strong></td>
+                                <td>Variável</td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        I ou U tônico<br>
+                                        sozinho na sílaba<br>
+                                        ou seguido de S<br>
+                                        <span style="color: #f87171;">(não seguido de NH)</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="line-height: 1.8;">
+                                        saída, país<br>
+                                        saúde, baú<br>
+                                        faísca, egoísta
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <div class="exercise">
+                            <h4>Exercício:</h4>
+                            <p>Classifique as palavras e indique se devem ser acentuadas:</p>
+                            <ol>
+                                <li>cafe → _____ (oxítona/paroxítona/proparoxítona)</li>
+                                <li>facil → _____ (oxítona/paroxítona/proparoxítona)</li>
+                                <li>lampada → _____ (oxítona/paroxítona/proparoxítona)</li>
+                                <li>pais → _____ (hiato)</li>
+                                <li>tambem → _____ (oxítona/paroxítona/proparoxítona)</li>
+                            </ol>
+                            <div class="answer-key">
+                                <strong>Respostas:</strong><br>
+                                1. café (oxítona - termina em E)<br>
+                                2. fácil (paroxítona - termina em L)<br>
+                                3. lâmpada (proparoxítona - sempre acentuada)<br>
+                                4. país (hiato - I tônico seguido de S)<br>
+                                5. também (oxítona - termina em EM)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- GÊNERO -->
+                <div id="genero" class="tab-content">
+                    <div class="section">
+                        <h2>Gênero dos Substantivos</h2>
+                        
+                        <div class="grammar-box">
+                            <p>Todos os substantivos em português têm gênero (masculino ou feminino). Ao contrário do inglês, TODOS os objetos, conceitos e seres têm gênero gramatical.</p>
+                        </div>
+                        
+                        <h3>Regras Gerais de Gênero</h3>
+                        
+                        <div class="rule-box">
+                            <h4>Geralmente Masculinos:</h4>
+                            <ul>
+                                <li><strong>Terminados em -o:</strong> o livro, o gato, o carro, o vinho</li>
+                                <li><strong>Terminados em -or:</strong> o professor, o amor, o calor, o computador</li>
+                                <li><strong>Terminados em -ema, -oma:</strong> o tema, o problema, o poema, o cinema, o idioma, o sistema</li>
+                                <li><strong>Meses, dias, pontos cardeais:</strong> o janeiro, o domingo, o norte, o sul</li>
+                                <li><strong>Rios, lagos, montes:</strong> o Amazonas, o Tietê, o Everest</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="rule-box">
+                            <h4>Geralmente Femininas:</h4>
+                            <ul>
+                                <li><strong>Terminadas em -a:</strong> a casa, a mesa, a flor, a cidade</li>
+                                <li><strong>Terminadas em -ção, -são:</strong> a canção, a lição, a televisão, a decisão</li>
+                                <li><strong>Terminadas em -dade, -tude:</strong> a cidade, a liberdade, a juventude</li>
+                                <li><strong>Terminadas em -gem:</strong> a viagem, a imagem, a garagem (exceção: o personagem)</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>Substantivos Biformes (duas formas)</h3>
+                        <div class="example">
+                            <p><strong>-o/-a:</strong> o menino/a menina, o gato/a gata, o lobo/a loba</p>
+                            <p><strong>-or/-ora:</strong> o professor/a professora, o doutor/a doutora</p>
+                            <p><strong>-ês/-esa:</strong> o português/a portuguesa, o camponês/a camponesa</p>
+                            <p><strong>Formas diferentes:</strong> o homem/a mulher, o pai/a mãe, o boi/a vaca</p>
+                        </div>
+                        
+                        <h3>Substantivos Uniformes (mesma forma)</h3>
+                        <div class="example">
+                            <p><strong>Comuns de dois gêneros:</strong> o/a estudante, o/a pianista, o/a dentista, o/a colega, o/a artista</p>
+                            <p><strong>Sobrecomuns (sempre o mesmo artigo):</strong> a criança, a pessoa, a vítima, o cônjuge</p>
+                            <p><strong>Epicenos (animais):</strong> a cobra, a águia, o jacaré (especificar: cobra macho/fêmea)</p>
+                        </div>
+                        
+                        <h3>Substantivos com Significados Diferentes</h3>
+                        <div class="rule-box">
+                            <strong>o capital</strong> = dinheiro, patrimônio<br>
+                            <strong>a capital</strong> = sede do governo, cidade principal<br><br>
+                            <strong>o grama</strong> = unidade de medida<br>
+                            <strong>a grama</strong> = relva, gramado<br><br>
+                            <strong>o cabeça</strong> = líder, chefe<br>
+                            <strong>a cabeça</strong> = parte do corpo<br><br>
+                            <strong>o guia</strong> = pessoa que conduz<br>
+                            <strong>a guia</strong> = documento, calçada<br><br>
+                            <strong>o moral</strong> = ânimo, estado de espírito<br>
+                            <strong>a moral</strong> = conjunto de valores, ética
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercícios de Gênero:</h4>
+                            
+                            <p><strong>A. Indique o artigo correto (o ou a):</strong></p>
+                            <ol>
+                                <li>_____ tema da reunião</li>
+                                <li>_____ viagem de férias</li>
+                                <li>_____ problema matemático</li>
+                                <li>_____ capital do estado (sede do governo)</li>
+                                <li>_____ grama de terra (medida)</li>
+                                <li>_____ personagem principal</li>
+                                <li>_____ telefonema importante</li>
+                                <li>_____ moral da história</li>
+                                <li>_____ amor verdadeiro</li>
+                                <li>_____ decisão importante</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>B. Escreva o feminino:</strong></p>
+                            <ol>
+                                <li>o professor → _____</li>
+                                <li>o ator → _____</li>
+                                <li>o português → _____</li>
+                                <li>o dentista → _____</li>
+                                <li>o poeta → _____</li>
+                                <li>o boi → _____</li>
+                                <li>o homem → _____</li>
+                                <li>o gato → _____</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>C. Complete com o gênero correto:</strong></p>
+                            <ol>
+                                <li>Preciso de _____ capital (dinheiro) para investir.</li>
+                                <li>Brasília é _____ capital do Brasil.</li>
+                                <li>Comprei 500 _____ (unidade de medida) de açúcar.</li>
+                                <li>_____ cabeça (parte do corpo) está doendo.</li>
+                            </ol>
+                            
+                            <div class="answer-key">
+                                <strong>Respostas A:</strong><br>
+                                1. o tema | 2. a viagem | 3. o problema | 4. a capital | 5. o grama<br>
+                                6. o/a personagem | 7. o telefonema | 8. a moral | 9. o amor | 10. a decisão<br><br>
+                                
+                                <strong>Respostas B:</strong><br>
+                                1. a professora | 2. a atriz | 3. a portuguesa | 4. a dentista<br>
+                                5. a poetisa | 6. a vaca | 7. a mulher | 8. a gata<br><br>
+                                
+                                <strong>Respostas C:</strong><br>
+                                1. o capital | 2. a capital | 3. gramas | 4. A cabeça
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PLURAL -->
+                <div id="plural" class="tab-content">
+                    <div class="section">
+                        <h2>Formação do Plural</h2>
+                        
+                        <h3>Regra 1: Palavras terminadas em vogal</h3>
+                        <div class="rule-box">
+                            <p><strong>Adicione -s</strong></p>
+                            casa → casas<br>
+                            gato → gatos<br>
+                            café → cafés<br>
+                            sofá → sofás<br>
+                            pé → pés
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Invariáveis (não mudam):</strong><br>
+                            lápis → lápis<br>
+                            ônibus → ônibus<br>
+                            vírus → vírus<br>
+                            tênis → tênis<br>
+                            atlas → atlas
+                        </div>
+                        
+                        <h3>Regra 2: Palavras terminadas em -ão</h3>
+                        <div class="rule-box">
+                            <p><strong>Não há regra fixa! Você precisa memorizar.</strong></p>
+                            
+                            <p style="margin-top: 15px;"><strong>-ão → -ões (maioria):</strong><br>
+                            coração → corações, limão → limões, balão → balões, botão → botões, estação → estações, leão → leões</p>
+                            
+                            <p style="margin-top: 15px;"><strong>-ão → -ãos:</strong><br>
+                            cidadão → cidadãos, irmão → irmãos, órfão → órfãos, órgão → órgãos, cristão → cristãos, bênção → bênçãos</p>
+                            
+                            <p style="margin-top: 15px;"><strong>-ão → -ães:</strong><br>
+                            pão → pães, cão → cães, alemão → alemães, capitão → capitães, guardião → guardiães</p>
+                            
+                            <p style="margin-top: 15px;"><strong>Alguns têm mais de uma forma:</strong><br>
+                            anão → anões/anãos<br>
+                            ancião → anciãos/anciães/anciões<br>
+                            vilão → vilões/vilães</p>
+                        </div>
+                        
+                        <h3>Regra 3: Palavras terminadas em -l</h3>
+                        <div class="rule-box">
+                            <p><strong>-al, -el, -ol, -ul → troca -l por -is:</strong><br>
+                            jornal → jornais, hotel → hotéis, pastel → pastéis, anzol → anzóis, azul → azuis, animal → animais</p>
+                            
+                            <p style="margin-top: 15px;"><strong>-il tônico (acento na última sílaba) → -is:</strong><br>
+                            fuzil → fuzis, barril → barris, canil → canis, funil → funis</p>
+                            
+                            <p style="margin-top: 15px;"><strong>-il átono (sem acento na última sílaba) → -eis:</strong><br>
+                            fácil → fáceis, difícil → difíceis, útil → úteis, fóssil → fósseis, réptil → répteis</p>
+                        </div>
+                        
+                        <h3>Regra 4: Palavras terminadas em -m</h3>
+                        <div class="rule-box">
+                            <strong>-m → -ns:</strong><br>
+                            homem → homens<br>
+                            jovem → jovens<br>
+                            viagem → viagens<br>
+                            nuvem → nuvens<br>
+                            som → sons
+                        </div>
+                        
+                        <h3>Regra 5: Palavras terminadas em -r, -s, -z</h3>
+                        <div class="rule-box">
+                            <strong>Adicione -es:</strong><br>
+                            flor → flores<br>
+                            amor → amores<br>
+                            mês → meses<br>
+                            país → países<br>
+                            vez → vezes<br>
+                            feliz → felizes<br>
+                            rapaz → rapazes
+                        </div>
+                        
+                        <h3>Regra 6: Palavras terminadas em -x</h3>
+                        <div class="rule-box">
+                            <strong>Invariável (não muda):</strong><br>
+                            o tórax → os tórax<br>
+                            o clímax → os clímax<br>
+                            a fênix → as fênix<br>
+                            o látex → os látex
+                        </div>
+                        
+                        <h3>Regra 7: Diminutivos em -zinho/-zito</h3>
+                        <div class="rule-box">
+                            <strong>Plural da palavra + sufixo no plural:</strong><br>
+                            pãozinho → pães + zinhos = pãezinhos<br>
+                            florzinha → flores + zinhas = florezinhas<br>
+                            coraçãozinho → corações + zinhos = coraçõezinhos<br>
+                            cafezinho → cafés + zinhos = cafezinhos<br>
+                            mãozinha → mãos + zinhas = mãozinhas
+                        </div>
+                        
+                        <h3>Plural de Palavras Compostas</h3>
+                        <div class="rule-box">
+                            <p><strong>Substantivo + Substantivo (ambos flexionam):</strong><br>
+                            couve-flor → couves-flores<br>
+                            cirurgião-dentista → cirurgiões-dentistas<br>
+                            redator-chefe → redatores-chefes</p>
+                            
+                            <p style="margin-top: 15px;"><strong>Substantivo + Adjetivo (ambos flexionam):</strong><br>
+                            amor-perfeito → amores-perfeitos<br>
+                            obra-prima → obras-primas<br>
+                            guarda-civil → guardas-civis</p>
+                            
+                            <p style="margin-top: 15px;"><strong>Verbo + Substantivo (só o substantivo flexiona):</strong><br>
+                            guarda-chuva → guarda-chuvas<br>
+                            beija-flor → beija-flores<br>
+                            saca-rolhas → saca-rolhas</p>
+                            
+                            <p style="margin-top: 15px;"><strong>Palavras repetidas (só a segunda flexiona):</strong><br>
+                            tico-tico → tico-ticos<br>
+                            reco-reco → reco-recos<br>
+                            corre-corre → corre-corres</p>
+                            
+                            <p style="margin-top: 15px;"><strong>Verbo + Advérbio (invariável):</strong><br>
+                            o bota-fora → os bota-fora<br>
+                            o pisa-mansinho → os pisa-mansinho</p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercícios de Plural:</h4>
+                            
+                            <p><strong>A. Escreva o plural:</strong></p>
+                            <ol>
+                                <li>limão → _____</li>
+                                <li>hotel → _____</li>
+                                <li>cidadão → _____</li>
+                                <li>fácil → _____</li>
+                                <li>pão → _____</li>
+                                <li>flor → _____</li>
+                                <li>vez → _____</li>
+                                <li>fuzil → _____</li>
+                                <li>lápis → _____</li>
+                                <li>alemão → _____</li>
+                                <li>jornal → _____</li>
+                                <li>irmão → _____</li>
+                                <li>azul → _____</li>
+                                <li>feliz → _____</li>
+                                <li>animal → _____</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>B. Plural de diminutivos:</strong></p>
+                            <ol>
+                                <li>pãozinho → _____</li>
+                                <li>florzinha → _____</li>
+                                <li>mãozinha → _____</li>
+                                <li>animaizinho → _____</li>
+                                <li>cafezinho → _____</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>C. Plural de compostos:</strong></p>
+                            <ol>
+                                <li>guarda-chuva → _____</li>
+                                <li>couve-flor → _____</li>
+                                <li>beija-flor → _____</li>
+                                <li>amor-perfeito → _____</li>
+                                <li>tico-tico → _____</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>D. Identifique e corrija os erros:</strong></p>
+                            <ol>
+                                <li>Os hoteis são caros. → _____</li>
+                                <li>Comprei três limões. → _____</li>
+                                <li>Os animales são lindos. → _____</li>
+                                <li>As flores estão fácies de cuidar. → _____</li>
+                            </ol>
+                            
+                            <div class="answer-key">
+                                <strong>Respostas A:</strong><br>
+                                1. limões | 2. hotéis | 3. cidadãos | 4. fáceis | 5. pães<br>
+                                6. flores | 7. vezes | 8. fuzis | 9. lápis | 10. alemães<br>
+                                11. jornais | 12. irmãos | 13. azuis | 14. felizes | 15. animais<br><br>
+                                
+                                <strong>Respostas B:</strong><br>
+                                1. pãezinhos | 2. florezinhas | 3. mãozinhas<br>
+                                4. animaizinhos | 5. cafezinhos<br><br>
+                                
+                                <strong>Respostas C:</strong><br>
+                                1. guarda-chuvas | 2. couves-flores | 3. beija-flores<br>
+                                4. amores-perfeitos | 5. tico-ticos<br><br>
+                                
+                                <strong>Respostas D:</strong><br>
+                                1. Os hotéis são caros. (hotel → hotéis, não hoteis)<br>
+                                2. Comprei três limões. (CORRETO)<br>
+                                3. Os animais são lindos. (animal → animais, não animales)<br>
+                                4. As flores são fáceis de cuidar. (fácil → fáceis, não fácies)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PRESENTE DO INDICATIVO -->
+                <div id="presente" class="tab-content">
+                    <div class="section">
+                        <h2>Presente do Indicativo</h2>
+                        
+                        <div class="grammar-box">
+                            <p>O presente do indicativo é usado para expressar:</p>
+                            <ul>
+                                <li>Ações habituais ou rotineiras</li>
+                                <li>Verdades universais ou fatos</li>
+                                <li>Estados permanentes</li>
+                                <li>Ações que acontecem no momento da fala</li>
+                            </ul>
+                        </div>
+                        
+                        <h3>Conjugações Regulares</h3>
+                        
+                        <h4>Verbos terminados em -AR</h4>
+                        <div class="rule-box">
+                            <p><strong>FALAR</strong></p>
+                            <table>
+                                <tr><th>Pronome</th><th>Conjugação</th></tr>
+                                <tr><td>Eu</td><td>falo</td></tr>
+                                <tr><td>Tu</td><td>falas</td></tr>
+                                <tr><td>Ele/Ela/Você</td><td>fala</td></tr>
+                                <tr><td>Nós</td><td>falamos</td></tr>
+                                <tr><td>Eles/Elas/Vocês</td><td>falam</td></tr>
+                            </table>
+                            <p style="margin-top: 15px;"><strong>Outros verbos em -AR:</strong> trabalhar, estudar, morar, amar, cantar, dançar, comprar, viajar</p>
+                        </div>
+                        
+                        <h4>Verbos terminados em -ER</h4>
+                        <div class="rule-box">
+                            <p><strong>COMER</strong></p>
+                            <table>
+                                <tr><th>Pronome</th><th>Conjugação</th></tr>
+                                <tr><td>Eu</td><td>como</td></tr>
+                                <tr><td>Tu</td><td>comes</td></tr>
+                                <tr><td>Ele/Ela/Você</td><td>come</td></tr>
+                                <tr><td>Nós</td><td>comemos</td></tr>
+                                <tr><td>Eles/Elas/Vocês</td><td>comem</td></tr>
+                            </table>
+                            <p style="margin-top: 15px;"><strong>Outros verbos em -ER:</strong> beber, vender, correr, aprender, entender, viver, escrever</p>
+                        </div>
+                        
+                        <h4>Verbos terminados em -IR</h4>
+                        <div class="rule-box">
+                            <p><strong>PARTIR</strong></p>
+                            <table>
+                                <tr><th>Pronome</th><th>Conjugação</th></tr>
+                                <tr><td>Eu</td><td>parto</td></tr>
+                                <tr><td>Tu</td><td>partes</td></tr>
+                                <tr><td>Ele/Ela/Você</td><td>parte</td></tr>
+                                <tr><td>Nós</td><td>partimos</td></tr>
+                                <tr><td>Eles/Elas/Vocês</td><td>partem</td></tr>
+                            </table>
+                            <p style="margin-top: 15px;"><strong>Outros verbos em -IR:</strong> abrir, decidir, dividir, assistir, discutir, existir</p>
+                        </div>
+                        
+                        <h3>Verbos Irregulares Essenciais</h3>
+                        
+                        <div class="grammar-box">
+                            <h4>SER (to be - permanent)</h4>
+                            <p>sou, és, é, somos, são</p>
+                            <div class="example">
+                                <p>Eu <strong>sou</strong> brasileiro.</p>
+                                <p>Ela <strong>é</strong> professora.</p>
+                                <p>Nós <strong>somos</strong> estudantes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>ESTAR (to be - temporary)</h4>
+                            <p>estou, estás, está, estamos, estão</p>
+                            <div class="example">
+                                <p>Eu <strong>estou</strong> cansado.</p>
+                                <p>Você <strong>está</strong> em casa?</p>
+                                <p>Eles <strong>estão</strong> felizes.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>TER (to have)</h4>
+                            <p>tenho, tens, tem, temos, têm</p>
+                            <div class="example">
+                                <p>Eu <strong>tenho</strong> um carro.</p>
+                                <p>Ela <strong>tem</strong> dois irmãos.</p>
+                                <p>Eles <strong>têm</strong> aula amanhã.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>IR (to go)</h4>
+                            <p>vou, vais, vai, vamos, vão</p>
+                            <div class="example">
+                                <p>Eu <strong>vou</strong> ao Brasil.</p>
+                                <p>Você <strong>vai</strong> à escola?</p>
+                                <p>Nós <strong>vamos</strong> viajar.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>FAZER (to do/make)</h4>
+                            <p>faço, fazes, faz, fazemos, fazem</p>
+                            <div class="example">
+                                <p>Eu <strong>faço</strong> exercício.</p>
+                                <p>O que você <strong>faz</strong>?</p>
+                                <p>Eles <strong>fazem</strong> o trabalho.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>PODER (can/to be able to)</h4>
+                            <p>posso, podes, pode, podemos, podem</p>
+                            <div class="example">
+                                <p>Eu <strong>posso</strong> ajudar.</p>
+                                <p>Você <strong>pode</strong> vir?</p>
+                                <p>Nós <strong>podemos</strong> sair.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>QUERER (to want)</h4>
+                            <p>quero, queres, quer, queremos, querem</p>
+                            <div class="example">
+                                <p>Eu <strong>quero</strong> café.</p>
+                                <p>Ela <strong>quer</strong> estudar.</p>
+                                <p>Eles <strong>querem</strong> viajar.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grammar-box">
+                            <h4>SABER (to know)</h4>
+                            <p>sei, sabes, sabe, sabemos, sabem</p>
+                            <div class="example">
+                                <p>Eu <strong>sei</strong> nadar.</p>
+                                <p>Você <strong>sabe</strong> falar português?</p>
+                                <p>Eles não <strong>sabem</strong> a resposta.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercícios:</h4>
+                            
+                            <p><strong>Complete com a forma correta do verbo no presente:</strong></p>
+                            <ol>
+                                <li>Eu _______ (FALAR) português todos os dias.</li>
+                                <li>Ela _______ (COMER) frutas no café da manhã.</li>
+                                <li>Nós _______ (PARTIR) amanhã cedo.</li>
+                                <li>Eles _______ (TER) uma casa grande.</li>
+                                <li>Você _______ (SER) estudante?</li>
+                                <li>Eu _______ (ESTAR) cansado agora.</li>
+                                <li>Maria _______ (IR) à escola de ônibus.</li>
+                                <li>O que você _______ (FAZER) aos fins de semana?</li>
+                                <li>Eu _______ (PODER) ajudar você.</li>
+                                <li>Nós _______ (QUERER) viajar.</li>
+                            </ol>
+                            
+                            <div class="answer-key">
+                                <strong>Respostas:</strong><br>
+                                1. falo | 2. come | 3. partimos | 4. têm | 5. é<br>
+                                6. estou | 7. vai | 8. faz | 9. posso | 10. queremos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VERBOS NO PASSADO -->
+                <div id="verbos-passado" class="tab-content">
+                    <div class="section">
+                        <h2>Verbos no Passado</h2>
+                        
+                        <h3>Pretérito Imperfeito</h3>
+                        <div class="grammar-box">
+                            <p>Usado para: ações habituais no passado, descrições, ações em progresso</p>
+                            <p><strong>Palavras-chave:</strong> sempre, todos os dias, antigamente, quando era criança, enquanto</p>
+                        </div>
+                        
+                        <h4>Conjugações Regulares:</h4>
+                        <div class="example">
+                            <p><strong>FALAR:</strong> falava, falavas, falava, falávamos, falavam</p>
+                            <p><strong>COMER:</strong> comia, comias, comia, comíamos, comiam</p>
+                            <p><strong>PARTIR:</strong> partia, partias, partia, partíamos, partiam</p>
+                        </div>
+                        
+                        <h4>Verbos Irregulares:</h4>
+                        <div class="rule-box">
+                            <p><strong>SER:</strong> era, eras, era, éramos, eram</p>
+                            <p><strong>TER:</strong> tinha, tinhas, tinha, tínhamos, tinham</p>
+                            <p><strong>VIR:</strong> vinha, vinhas, vinha, vínhamos, vinham</p>
+                            <p><strong>PÔR:</strong> punha, punhas, punha, púnhamos, punham</p>
+                        </div>
+                        
+                        <h3>Pretérito Perfeito</h3>
+                        <div class="grammar-box">
+                            <p>Usado para: ações completas e pontuais no passado</p>
+                            <p><strong>Palavras-chave:</strong> ontem, na semana passada, às 8 horas, de repente</p>
+                        </div>
+                        
+                        <h4>Conjugações Regulares:</h4>
+                        <div class="example">
+                            <p><strong>FALAR:</strong> falei, falaste, falou, falamos, falaram</p>
+                            <p><strong>COMER:</strong> comi, comeste, comeu, comemos, comeram</p>
+                            <p><strong>PARTIR:</strong> parti, partiste, partiu, partimos, partiram</p>
+                        </div>
+                        
+                        <h4>Verbos Irregulares:</h4>
+                        <div class="rule-box">
+                            <p><strong>SER/IR:</strong> fui, foste, foi, fomos, foram</p>
+                            <p><strong>FAZER:</strong> fiz, fizeste, fez, fizemos, fizeram</p>
+                            <p><strong>TER:</strong> tive, tiveste, teve, tivemos, tiveram</p>
+                            <p><strong>VER:</strong> vi, viste, viu, vimos, viram</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PARTICÍPIO -->
+                <div id="participio" class="tab-content">
+                    <div class="section">
+                        <h2>Particípio Passado</h2>
+                        
+                        <h3>Formas do Particípio</h3>
+                        <div class="grammar-box">
+                            <p><strong>Com TER/HAVER:</strong> Forma regular (invariável)</p>
+                            <p><strong>Com SER/ESTAR:</strong> Forma irregular (variável em gênero e número)</p>
+                        </div>
+                        
+                        <h3>Verbos Abundantes</h3>
+                        <table>
+                            <tr>
+                                <th>Verbo</th>
+                                <th>Regular (TER/HAVER)</th>
+                                <th>Irregular (SER/ESTAR)</th>
+                            </tr>
+                            <tr><td>Aceitar</td><td>aceitado</td><td>aceito</td></tr>
+                            <tr><td>Acender</td><td>acendido</td><td>aceso</td></tr>
+                            <tr><td>Anexar</td><td>anexado</td><td>anexo</td></tr>
+                            <tr><td>Entregar</td><td>entregado</td><td>entregue</td></tr>
+                            <tr><td>Imprimir</td><td>imprimido</td><td>impresso</td></tr>
+                            <tr><td>Limpar</td><td>limpado</td><td>limpo</td></tr>
+                            <tr><td>Matar</td><td>matado</td><td>morto</td></tr>
+                            <tr><td>Pagar</td><td>pagado</td><td>pago</td></tr>
+                            <tr><td>Ganhar</td><td>ganhado</td><td>ganho</td></tr>
+                        </table>
+                        
+                        <h3>Verbos com Apenas Uma Forma</h3>
+                        <div class="rule-box">
+                            <p><strong>Abrir:</strong> aberto</p>
+                            <p><strong>Dizer:</strong> dito</p>
+                            <p><strong>Escrever:</strong> escrito</p>
+                            <p><strong>Fazer:</strong> feito</p>
+                            <p><strong>Pôr:</strong> posto</p>
+                            <p><strong>Ver:</strong> visto</p>
+                            <p><strong>Vir:</strong> vindo</p>
+                        </div>
+                        
+                        <div class="example">
+                            <h4>Exemplos:</h4>
+                            <p>Nós temos <strong>aceitado</strong> muitos convites</p>
+                            <p>Muitos convites foram <strong>aceitos</strong> por nós</p>
+                            <br>
+                            <p>A secretária tem <strong>imprimido</strong> as provas</p>
+                            <p>As provas foram <strong>impressas</strong> pela secretária</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ADVÉRBIOS -->
+                <div id="adverbios" class="tab-content">
+                    <div class="section">
+                        <h2>Advérbios e Palavras Importantes</h2>
+                        
+                        <h3>Muito/Muitos/Muitas</h3>
+                        <div class="grammar-box">
+                            <p><strong>MUITO</strong> (advérbio - invariável): modifica verbos, adjetivos ou outros advérbios</p>
+                            <p><strong>MUITOS/MUITAS</strong> (adjetivo - variável): modifica substantivos</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Dica importante:</strong> Very doesn't vary! (Muito não varia!)<br>
+                            Quando MUITO significa "very" ou "a lot" (advérbio), ele NUNCA muda.<br>
+                            Quando significa "many" ou "much" (adjetivo), ele concorda com o substantivo (muitos/muitas).
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Muitas</strong> garotas correm <strong>muito</strong> rápido.</p>
+                            <p><em>(Many girls run very fast)</em></p>
+                            <p>Eu comi <strong>muitas</strong> lasanhas e agora estou passando <strong>muito</strong> mal.</p>
+                            <p><em>(I ate many lasagnas and now I feel very bad)</em></p>
+                        </div>
+                        
+                        <h3>Onde vs. Aonde</h3>
+                        <div class="grammar-box">
+                            <p><strong>ONDE</strong> = lugar fixo, permanência</p>
+                            <p><strong>AONDE</strong> = movimento, deslocamento (para onde)</p>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <strong>Dica:</strong> Substitua por "para onde". Se fizer sentido, use AONDE.
+                        </div>
+                        
+                        <div class="example">
+                            <p><strong>Onde</strong> você mora? <em>(permanência)</em></p>
+                            <p><strong>Aonde</strong> você vai? <em>(movimento)</em></p>
+                        </div>
+                        
+                        <h3>Mal vs. Mau/Má</h3>
+                        <div class="grammar-box">
+                            <p><strong>MAL</strong> (advérbio) = oposto de BEM</p>
+                            <p><strong>MAU/MÁ</strong> (adjetivo) = oposto de BOM/BOA</p>
+                        </div>
+                        
+                        <div class="example">
+                            <p>Um aluno se sentiu <strong>mal</strong> esta manhã. <em>(bem → mal)</em></p>
+                            <p>O cão era <strong>mau</strong>. <em>(bom → mau)</em></p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercícios:</h4>
+                            
+                            <p><strong>A. Complete com MUITO, MUITOS ou MUITAS:</strong></p>
+                            <ol>
+                                <li>Ela corre _______ todos os dias.</li>
+                                <li>Tenho _______ amigos na escola.</li>
+                                <li>_______ pessoas viajaram nas férias.</li>
+                                <li>Estou _______ cansado hoje.</li>
+                                <li>Comprei _______ frutas no mercado.</li>
+                                <li>Ele estuda _______ para a prova.</li>
+                                <li>_______ alunos faltaram à aula.</li>
+                                <li>A comida estava _______ boa.</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>B. Complete com ONDE ou AONDE:</strong></p>
+                            <ol>
+                                <li>_______ você nasceu?</li>
+                                <li>_______ vocês vão nas férias?</li>
+                                <li>_______ fica a sua casa?</li>
+                                <li>_______ você está indo agora?</li>
+                                <li>Não sei _______ coloquei as chaves.</li>
+                                <li>_______ você quer chegar com essa atitude?</li>
+                                <li>_______ você trabalha?</li>
+                                <li>_______ me leva esse caminho?</li>
+                            </ol>
+                            
+                            <p style="margin-top: 25px;"><strong>C. Complete com MAL ou MAU/MÁ:</strong></p>
+                            <ol>
+                                <li>Ele se comportou _______ na reunião.</li>
+                                <li>Que tempo _______! Está chovendo muito.</li>
+                                <li>A professora está se sentindo _______.</li>
+                                <li>Ele é um _______ aluno, nunca estuda.</li>
+                                <li>Dormi _______ ontem à noite.</li>
+                                <li>Isso é um _______ exemplo para as crianças.</li>
+                                <li>A comida estava _______ preparada.</li>
+                                <li>Tenho uma _______ notícia para você.</li>
+                            </ol>
+                            
+                            <div class="answer-key">
+                                <strong>Respostas:</strong><br><br>
+                                
+                                <strong>A. MUITO/MUITOS/MUITAS:</strong><br>
+                                1. muito (advérbio - modifica o verbo "corre")<br>
+                                2. muitos (adjetivo - modifica "amigos")<br>
+                                3. Muitas (adjetivo - modifica "pessoas")<br>
+                                4. muito (advérbio - modifica "cansado")<br>
+                                5. muitas (adjetivo - modifica "frutas")<br>
+                                6. muito (advérbio - modifica "estuda")<br>
+                                7. Muitos (adjetivo - modifica "alunos")<br>
+                                8. muito (advérbio - modifica "boa")<br><br>
+                                
+                                <strong>B. ONDE/AONDE:</strong><br>
+                                1. Onde (lugar fixo - nascimento)<br>
+                                2. Aonde (movimento - para onde vão)<br>
+                                3. Onde (lugar fixo - localização)<br>
+                                4. Aonde (movimento - para onde está indo)<br>
+                                5. onde (lugar fixo - as chaves estão em algum lugar)<br>
+                                6. Aonde (movimento - para onde quer chegar)<br>
+                                7. Onde (lugar fixo - local de trabalho)<br>
+                                8. Aonde (movimento - para onde o caminho leva)<br><br>
+                                
+                                <strong>C. MAL/MAU/MÁ:</strong><br>
+                                1. mal (advérbio - oposto de "bem")<br>
+                                2. mau (adjetivo masculino - oposto de "bom")<br>
+                                3. mal (advérbio - sentir-se mal = sentir-se bem)<br>
+                                4. mau (adjetivo masculino - oposto de "bom")<br>
+                                5. mal (advérbio - dormir mal = dormir bem)<br>
+                                6. mau (adjetivo masculino - oposto de "bom")<br>
+                                7. mal (advérbio - mal preparada = bem preparada)<br>
+                                8. má (adjetivo feminino - oposto de "boa")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PORQUÊS -->
+                <div id="porques" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Porquês será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+                <!-- PREPOSIÇÕES -->
+                <div id="preposicoes" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Preposições será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+                <!-- REGÊNCIA -->
+                <div id="regencia" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Regência será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+                <!-- SUBJUNTIVO -->
+                <div id="subjuntivo" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Subjuntivo será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+                <!-- IMPERATIVO -->
+                <div id="imperativo" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Imperativo será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+                <!-- PRONOMES -->
+                <div id="pronomes" class="tab-content">
+                    <div class="section">
+                        <h2>Conteúdo em desenvolvimento</h2>
+                        <p>Seção de Pronomes será adicionada em breve.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    const targetContent = document.getElementById(targetTab);
+                    
+                    if (targetContent) {
+                        navTabs.forEach(t => t.classList.remove('active'));
+                        tabContents.forEach(c => c.classList.remove('active'));
+                        
+                        this.classList.add('active');
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
