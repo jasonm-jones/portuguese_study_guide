@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PORT 321 - Guia de Estudo</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/nav-loader.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -31,6 +33,7 @@
             flex-direction: column;
             height: 90vh;
             max-width: 100%;
+            position: relative;  /* Added for proper stacking context */
         }
         
         header {
@@ -55,71 +58,6 @@
             display: flex;
             flex: 1;
             overflow: hidden;
-        }
-        
-        .sidebar {
-            width: 250px;
-            background: #2d3748;
-            border-right: 3px solid #4a5568;
-            overflow-y: auto;
-            flex-shrink: 0;
-        }
-        
-        .sidebar::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #718096;
-            border-radius: 4px;
-        }
-        
-        .nav-tabs {
-            display: flex;
-            flex-direction: column;
-            padding: 15px 0;
-        }
-        
-        .nav-tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: #cbd5e0;
-            transition: all 0.3s;
-            text-align: left;
-            border-left: 4px solid transparent;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .nav-section-header {
-            padding: 15px 20px 10px 20px;
-            font-size: 0.85em;
-            font-weight: 700;
-            color: #a78bfa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #4a5568;
-            margin-top: 10px;
-        }
-        
-        .nav-section-header:first-child {
-            margin-top: 0;
-        }
-        
-        .nav-tab:hover {
-            background: #4a5568;
-            border-left-color: #7c3aed;
-            color: #f7fafc;
-        }
-        
-        .nav-tab.active {
-            background: #4a5568;
-            color: #a78bfa;
-            border-left-color: #a78bfa;
         }
         
         .content {
@@ -232,44 +170,9 @@
                 border-radius: 0;
             }
             
-            .main-layout {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                order: 2;
-                max-height: 200px;
-            }
-            
             .content {
-                order: 1;
                 flex: 0 0 auto;
                 height: calc(100vh - 200px - 100px);
-            }
-            
-            .nav-tabs {
-                flex-direction: row;
-                overflow-x: auto;
-                padding: 10px;
-            }
-            
-            .nav-tab {
-                white-space: nowrap;
-                min-width: 120px;
-                text-align: center;
-                border-left: none;
-                border-bottom: 4px solid transparent;
-            }
-            
-            .nav-tab:hover,
-            .nav-tab.active {
-                border-left: none;
-                border-bottom-color: #a78bfa;
-            }
-            
-            .nav-section-header {
-                display: none;
             }
         }
     </style>
@@ -282,28 +185,8 @@
         </header>
         
         <div class="main-layout">
-            <div class="sidebar">
-                <div class="nav-tabs">
-                    <div class="nav-section-header">📚 Midterm 1</div>
-                    <a href="pages/acentuacao.html" class="nav-tab">Acentuação</a>
-                    <a href="pages/genero.html" class="nav-tab">Gênero (Substantivos)</a>
-                    <a href="pages/plural.html" class="nav-tab">Plural (Substantivos)</a>
-                    <a href="pages/adverbios.html" class="nav-tab">Advérbios</a>
-                    <a href="pages/porques.html" class="nav-tab">Porquês <span class="coming-soon">(em breve)</span></a>
-                    <a href="pages/presente.html" class="nav-tab">Presente do Indicativo</a>
-                    <a href="pages/preterito.html" class="nav-tab">Pretérito (Perfeito/Imperfeito)</a>
-                    <a href="pages/participio.html" class="nav-tab">Particípio</a>
-                    
-                    <div class="nav-section-header">📖 Midterm 2</div>
-                    <a href="pages/preposicoes.html" class="nav-tab">Preposições <span class="coming-soon">(em breve)</span></a>
-                    <a href="pages/regencia.html" class="nav-tab">Regência <span class="coming-soon">(em breve)</span></a>
-                    <a href="pages/subjuntivo.html" class="nav-tab">Subjuntivo <span class="coming-soon">(em breve)</span></a>
-                    <a href="pages/imperativo.html" class="nav-tab">Imperativo <span class="coming-soon">(em breve)</span></a>
-                    <a href="pages/pronomes.html" class="nav-tab">Pronomes <span class="coming-soon">(em breve)</span></a>
-                </div>
-            </div>
             
-            <div class="content">
+            <div class="content page-wrapper">
                 <div class="welcome-section">
                     <h2>Bem-vindos ao Guia de Estudo</h2>
                     <p>Este é o seu guia completo para a disciplina PORT 321. Navegue pelos tópicos usando o menu lateral para acessar conteúdos detalhados, exemplos práticos e exercícios.</p>
