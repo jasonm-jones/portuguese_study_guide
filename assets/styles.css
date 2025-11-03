@@ -60,11 +60,118 @@ header p {
     color: #a78bfa;
 }
 
+/* Fixed Menu */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background: #2d3748;
+    border-right: 3px solid #4a5568;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.nav-tabs {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+}
+
+.nav-section-header {
+    padding: 15px 20px 10px 20px;
+    font-size: 0.85em;
+    font-weight: 700;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #4a5568;
+    margin-top: 10px;
+}
+
+.nav-section-header:first-child {
+    margin-top: 0;
+}
+
+.nav-tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #cbd5e0;
+    transition: all 0.3s;
+    text-align: left;
+    border-left: 4px solid transparent;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-tab:hover {
+    background: #4a5568;
+    border-left-color: #7c3aed;
+    color: #f7fafc;
+}
+
+.nav-tab.active {
+    background: #4a5568;
+    color: #a78bfa;
+    border-left-color: #a78bfa;
+}
+
+.coming-soon {
+    color: #fbbf24;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 /* Content Area */
+.page-wrapper {
+    margin-left: 250px;
+    min-height: 100vh;
+}
+
 .content {
     padding: 40px;
     max-width: 100%;
     overflow-x: hidden;
+}
+
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: #7c3aed;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .page-wrapper {
+        margin-left: 0;
+    }
 }
 
 /* Typography */
