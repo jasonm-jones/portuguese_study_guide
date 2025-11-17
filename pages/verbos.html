@@ -5,92 +5,410 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quadro de Verbos — Padrões Regulares</title>
   <link rel="stylesheet" href="../assets/styles.css">
-  <style>
-    :root{ --bg:#0f1724; --card:#111827; --accent:#7c3aed; --muted:#cbd5e1; }
-    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--muted);margin:0;padding:24px}
-    .page-header{max-width:980px;margin:0 auto 18px}
-    h1{margin:0 0 8px;font-size:1.25rem;color:var(--muted)}
-    p.lead{margin:0 0 18px;color:#94a3b8}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:980px;margin:0 auto}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,0.04);border-radius:8px;overflow:hidden}
-    .card h3{margin:0;background:linear-gradient(90deg,var(--accent),#5b21b6);padding:10px 12px;color:#fff;font-size:1rem}
-    .card .body{padding:12px}
-    .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .col{background:transparent;padding:8px;border-radius:6px}
-    .col strong{color:var(--accent);display:block;margin-bottom:6px}
-    .example{font-family:monospace;color:#e6eef8;white-space:pre-wrap}
-
-    /* small screens: stack AR/ER/IR columns */
-    @media (max-width:520px){ .cols{grid-template-columns:1fr} }
-
-    .note{max-width:980px;margin:18px auto 0;color:#9fb0c8;font-size:0.95rem}
-    a.back{color:#cbd5e1;font-size:0.95rem;display:inline-block;margin-bottom:12px}
-    /* Conjugation table authoritative styles to ensure header/body alignment */
-    .conj-table{display:table;width:100%;border-collapse:collapse;table-layout:fixed;font-size:0.95rem}
-    .conj-table col{ /* no default widths here; colgroup defines exact percentages */ }
-    .conj-table thead{display:table-header-group}
-    .conj-table tbody{display:table-row-group}
-    .conj-table th, .conj-table td{
-      box-sizing:border-box;
-      padding:12px;
-      border:1px solid rgba(255,255,255,0.04);
-      vertical-align:top;
-      text-align:left;
-      word-wrap:break-word;
-      overflow-wrap:break-word;
-    }
-    .conj-table thead th{background:linear-gradient(90deg,var(--accent),#5b21b6);color:#fff}
-  </style>
+  <!-- Page-specific styles moved to `assets/styles.css` -->
 </head>
 <body>
-  <div class="page-header">
-    <a class="back" href="../main.html">← Voltar ao Menu Principal</a>
-    <h1>Quadro de Verbos — Padrões Regulares</h1>
-    <p class="lead">Compact table with AR / ER / IR endings across common tenses. Use the horizontal scroll on small screens if needed.</p>
-  </div>
-
-  <div style="max-width:980px;margin:0 auto;">
-    <div style="overflow-x:auto;">
-      <table class="conj-table">
-        <colgroup>
-          <col style="width:20%;">
-          <col style="width:26.6667%;">
-          <col style="width:26.6667%;">
-          <col style="width:26.6666%;">
-        </colgroup>
-        <thead>
-          <tr>
-            <th>Verb Class</th>
-            <th>Presente do Indicativo</th>
-            <th>Pretérito Perfeito (simples)</th>
-            <th>Pretérito Imperfeito</th>
+  <div class="conj-viewport">
+    <div class="conj-container">
+      <div class="page-header">
+        <a class="back" href="../main.html">← Voltar ao Menu Principal</a>
+        <h1>Quadro de Verbos — Padrões Regulares</h1>
+        <p class="lead">Compact table with AR / ER / IR endings across common tenses. Use the horizontal scroll on small screens if needed.</p>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="conj-table">
+          <colgroup>
+            <col style="width:20%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:7.5%">
+            <col style="width:5%">
+          </colgroup>
+              <tr>
+                <th>Classe / Pronome</th>
+                <th>Presente</th>
+                <th>Pretérito Perfeito</th>
+                <th>Pretérito Imperfeito</th>
+                <th>Mais-que-perfeito</th>
+                <th>Futuro (presente)</th>
+                <th>Futuro do Pretérito</th>
+                <th>Presente do Subjuntivo</th>
+                <th>Imperativo afirmativo</th>
+                <th>Imperativo negativo</th>
+                <th>Futuro do Subjuntivo</th>
+                <th></th>
+              </tr>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>AR (ex: falar)</strong></td>
-            <td>-o, -as, -a, -amos, -ais, -am</td>
-            <td>-ei, -aste, -ou, -amos, -astes, -aram</td>
-            <td>-ava, -avas, -ava, -ávamos, -áveis, -avam</td>
+            <td>
+              <ul class="pronouns">
+                <li><span class="pronoun">eu</span> <span class="verb-class">(AR — falar)</span></li>
+                <li><span class="pronoun">tu</span></li>
+                <li><span class="pronoun">ele / ela / você</span></li>
+                <li><span class="pronoun">nós</span></li>
+                <li><span class="pronoun">vós</span></li>
+                <li><span class="pronoun">eles / elas / vocês</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-o</li>
+                <li>-as</li>
+                <li>-a</li>
+                <li>-amos</li>
+                <li>-ais</li>
+                <li>-am</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ei</li>
+                <li>-aste</li>
+                <li>-ou</li>
+                <li>-amos</li>
+                <li>-astes</li>
+                <li>-aram</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ava</li>
+                <li>-avas</li>
+                <li>-ava</li>
+                <li>-ávamos</li>
+                <li>-áveis</li>
+                <li>-avam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>tinha + falado</li>
+                <li>tinhas + falado</li>
+                <li>tinha + falado</li>
+                <li>tínhamos + falado</li>
+                <li>tínheis + falado</li>
+                <li>tinham + falado</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ei</li>
+                <li>-ás</li>
+                <li>-á</li>
+                <li>-emos</li>
+                <li>-eis</li>
+                <li>-ão</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ia</li>
+                <li>-ias</li>
+                <li>-ia</li>
+                <li>-íamos</li>
+                <li>-íeis</li>
+                <li>-iam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-e</li>
+                <li>-es</li>
+                <li>-e</li>
+                <li>-emos</li>
+                <li>-eis</li>
+                <li>-em</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>fala</li>
+                <li>fale</li>
+                <li>fale</li>
+                <li>falemos</li>
+                <li>falai</li>
+                <li>falem</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>não fales</li>
+                <li>não fale</li>
+                <li>não fale</li>
+                <li>não falemos</li>
+                <li>não faleis</li>
+                <li>não falem</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>quando eu falar</li>
+                <li>quando tu falares</li>
+                <li>quando ele falar</li>
+                <li>quando nós falarmos</li>
+                <li>quando vós falardes</li>
+                <li>quando eles falarem</li>
+              </ul>
+            </td>
           </tr>
           <tr>
-            <td><strong>ER (ex: comer)</strong></td>
-            <td>-o, -es, -e, -emos, -eis, -em</td>
-            <td>-i, -este, -eu, -emos, -estes, -eram</td>
-            <td>-ia, -ias, -ia, -íamos, -íeis, -iam</td>
+            <td>
+              <ul class="pronouns">
+                <li><span class="pronoun">eu</span> <span class="verb-class">(ER — comer)</span></li>
+                <li><span class="pronoun">tu</span></li>
+                <li><span class="pronoun">ele / ela / você</span></li>
+                <li><span class="pronoun">nós</span></li>
+                <li><span class="pronoun">vós</span></li>
+                <li><span class="pronoun">eles / elas / vocês</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-o</li>
+                <li>-es</li>
+                <li>-e</li>
+                <li>-emos</li>
+                <li>-eis</li>
+                <li>-em</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-i</li>
+                <li>-este</li>
+                <li>-eu</li>
+                <li>-emos</li>
+                <li>-estes</li>
+                <li>-eram</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ia</li>
+                <li>-ias</li>
+                <li>-ia</li>
+                <li>-íamos</li>
+                <li>-íeis</li>
+                <li>-iam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>tinha + comido</li>
+                <li>tinhas + comido</li>
+                <li>tinha + comido</li>
+                <li>tínhamos + comido</li>
+                <li>tínheis + comido</li>
+                <li>tinham + comido</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ei</li>
+                <li>-ás</li>
+                <li>-á</li>
+                <li>-emos</li>
+                <li>-eis</li>
+                <li>-ão</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ia</li>
+                <li>-ias</li>
+                <li>-ia</li>
+                <li>-íamos</li>
+                <li>-íeis</li>
+                <li>-iam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-a</li>
+                <li>-as</li>
+                <li>-a</li>
+                <li>-amos</li>
+                <li>-ais</li>
+                <li>-am</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>come</li>
+                <li>coma</li>
+                <li>coma</li>
+                <li>comamos</li>
+                <li>comei</li>
+                <li>comam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>não comas</li>
+                <li>não coma</li>
+                <li>não coma</li>
+                <li>não comamos</li>
+                <li>não comais</li>
+                <li>não comam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>quando eu comer</li>
+                <li>quando tu comeres</li>
+                <li>quando ele comer</li>
+                <li>quando nós comermos</li>
+                <li>quando vós comerdes</li>
+                <li>quando eles comerem</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+                <li>&nbsp;</li>
+              </ul>
+            </td>
           </tr>
           <tr>
-            <td><strong>IR (ex: partir)</strong></td>
-            <td>-o, -es, -e, -imos, -is, -em</td>
-            <td>-i, -iste, -iu, -imos, -istes, -iram</td>
-            <td>-ia, -ias, -ia, -íamos, -íeis, -iam</td>
+            <td>
+              <ul class="pronouns">
+                <li><span class="pronoun">eu</span> <span class="verb-class">(IR — partir)</span></li>
+                <li><span class="pronoun">tu</span></li>
+                <li><span class="pronoun">ele / ela / você</span></li>
+                <li><span class="pronoun">nós</span></li>
+                <li><span class="pronoun">vós</span></li>
+                <li><span class="pronoun">eles / elas / vocês</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-o</li>
+                <li>-es</li>
+                <li>-e</li>
+                <li>-imos</li>
+                <li>-is</li>
+                <li>-em</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-i</li>
+                <li>-iste</li>
+                <li>-iu</li>
+                <li>-imos</li>
+                <li>-istes</li>
+                <li>-iram</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ia</li>
+                <li>-ias</li>
+                <li>-ia</li>
+                <li>-íamos</li>
+                <li>-íeis</li>
+                <li>-iam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>tinha + partido</li>
+                <li>tinhas + partido</li>
+                <li>tinha + partido</li>
+                <li>tínhamos + partido</li>
+                <li>tínheis + partido</li>
+                <li>tinham + partido</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ei</li>
+                <li>-ás</li>
+                <li>-á</li>
+                <li>-emos</li>
+                <li>-eis</li>
+                <li>-ão</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-ia</li>
+                <li>-ias</li>
+                <li>-ia</li>
+                <li>-íamos</li>
+                <li>-íeis</li>
+                <li>-iam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>-a</li>
+                <li>-as</li>
+                <li>-a</li>
+                <li>-amos</li>
+                <li>-ais</li>
+                <li>-am</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>parte</li>
+                <li>parta</li>
+                <li>parta</li>
+                <li>partamos</li>
+                <li>parti</li>
+                <li>partam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>não partas</li>
+                <li>não parta</li>
+                <li>não parta</li>
+                <li>não partamos</li>
+                <li>não partais</li>
+                <li>não partam</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="endings">
+                <li>quando eu partir</li>
+                <li>quando tu partires</li>
+                <li>quando ele partir</li>
+                <li>quando nós partirmos</li>
+                <li>quando vós partirdes</li>
+                <li>quando eles partirem</li>
+              </ul>
+            </td>
           </tr>
         </tbody>
       </table>
+      </div>
+      <p style="color:#9fb0c8;margin-top:12px">To add more tenses, I can append columns (Futuro, Condicional, Subjuntivo) or create a transposed printable version — which would you prefer?</p>
     </div>
-
-    <p style="color:#9fb0c8;margin-top:12px">To add more tenses, I can append columns (Futuro, Condicional, Subjuntivo) or create a transposed printable version — which would you prefer?</p>
   </div>
 
   <script src="../assets/nav-loader.js" defer></script>

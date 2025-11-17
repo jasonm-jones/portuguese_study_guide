@@ -260,6 +260,36 @@ tr:nth-child(even) {
     background: #374151;
 }
 
+/* Conjugation table specific styles (moved from pages/verbos.html) */
+.conj-table{
+    display:table;
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    font-size:0.95rem;
+    background: transparent;
+}
+.conj-table thead{ display: table-header-group; }
+.conj-table tbody{ display: table-row-group; }
+.conj-table th, .conj-table td{
+    box-sizing:border-box;
+    padding:12px;
+    border:1px solid rgba(255,255,255,0.04);
+    vertical-align:top;
+    text-align:left;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    color: #e2e8f0;
+}
+.endings{ list-style:none; margin:0; padding:0; }
+.endings li{ margin:0 0 6px 0; font-family:monospace; color:#e6eef8 }
+.pronouns{ list-style:none; margin:0; padding:0; }
+.pronouns li{ margin:0 0 6px 0; color:#cbd5e0; font-weight:600 }
+.pronouns li .verb-class{ color:#a78bfa; font-weight:700; margin-left:8px; font-size:0.95rem }
+.conj-table thead th{ background: linear-gradient(90deg,#7c3aed,#5b21b6); color:#fff }
+.conj-viewport{ width:100vw; display:flex; justify-content:center; }
+.conj-container{ max-width:980px; width:100%; }
+
 /* Exercises */
 .exercise {
     background: #44403c;
