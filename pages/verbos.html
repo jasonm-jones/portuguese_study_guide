@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quadro de Verbos — Padrões Regulares</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <style>
+    :root{ --bg:#0f1724; --card:#111827; --accent:#7c3aed; --muted:#cbd5e1; }
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--muted);margin:0;padding:24px}
+    .page-header{max-width:980px;margin:0 auto 18px}
+    h1{margin:0 0 8px;font-size:1.25rem;color:var(--muted)}
+    p.lead{margin:0 0 18px;color:#94a3b8}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:980px;margin:0 auto}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,0.04);border-radius:8px;overflow:hidden}
+    .card h3{margin:0;background:linear-gradient(90deg,var(--accent),#5b21b6);padding:10px 12px;color:#fff;font-size:1rem}
+    .card .body{padding:12px}
+    .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .col{background:transparent;padding:8px;border-radius:6px}
+    .col strong{color:var(--accent);display:block;margin-bottom:6px}
+    .example{font-family:monospace;color:#e6eef8;white-space:pre-wrap}
+
+    /* small screens: stack AR/ER/IR columns */
+    @media (max-width:520px){ .cols{grid-template-columns:1fr} }
+
+    .note{max-width:980px;margin:18px auto 0;color:#9fb0c8;font-size:0.95rem}
+    a.back{color:#cbd5e1;font-size:0.95rem;display:inline-block;margin-bottom:12px}
+    /* Conjugation table authoritative styles to ensure header/body alignment */
+    .conj-table{display:table;width:100%;border-collapse:collapse;table-layout:fixed;font-size:0.95rem}
+    .conj-table col{ /* no default widths here; colgroup defines exact percentages */ }
+    .conj-table thead{display:table-header-group}
+    .conj-table tbody{display:table-row-group}
+    .conj-table th, .conj-table td{
+      box-sizing:border-box;
+      padding:12px;
+      border:1px solid rgba(255,255,255,0.04);
+      vertical-align:top;
+      text-align:left;
+      word-wrap:break-word;
+      overflow-wrap:break-word;
+    }
+    .conj-table thead th{background:linear-gradient(90deg,var(--accent),#5b21b6);color:#fff}
+  </style>
+</head>
+<body>
+  <div class="page-header">
+    <a class="back" href="../main.html">← Voltar ao Menu Principal</a>
+    <h1>Quadro de Verbos — Padrões Regulares</h1>
+    <p class="lead">Compact table with AR / ER / IR endings across common tenses. Use the horizontal scroll on small screens if needed.</p>
+  </div>
+
+  <div style="max-width:980px;margin:0 auto;">
+    <div style="overflow-x:auto;">
+      <table class="conj-table">
+        <colgroup>
+          <col style="width:20%;">
+          <col style="width:26.6667%;">
+          <col style="width:26.6667%;">
+          <col style="width:26.6666%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Verb Class</th>
+            <th>Presente do Indicativo</th>
+            <th>Pretérito Perfeito (simples)</th>
+            <th>Pretérito Imperfeito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AR (ex: falar)</strong></td>
+            <td>-o, -as, -a, -amos, -ais, -am</td>
+            <td>-ei, -aste, -ou, -amos, -astes, -aram</td>
+            <td>-ava, -avas, -ava, -ávamos, -áveis, -avam</td>
+          </tr>
+          <tr>
+            <td><strong>ER (ex: comer)</strong></td>
+            <td>-o, -es, -e, -emos, -eis, -em</td>
+            <td>-i, -este, -eu, -emos, -estes, -eram</td>
+            <td>-ia, -ias, -ia, -íamos, -íeis, -iam</td>
+          </tr>
+          <tr>
+            <td><strong>IR (ex: partir)</strong></td>
+            <td>-o, -es, -e, -imos, -is, -em</td>
+            <td>-i, -iste, -iu, -imos, -istes, -iram</td>
+            <td>-ia, -ias, -ia, -íamos, -íeis, -iam</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="color:#9fb0c8;margin-top:12px">To add more tenses, I can append columns (Futuro, Condicional, Subjuntivo) or create a transposed printable version — which would you prefer?</p>
+  </div>
+
+  <script src="../assets/nav-loader.js" defer></script>
+</body>
+</html>

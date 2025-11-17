@@ -235,11 +235,11 @@ table {
     margin: 20px 0;
     background: #2d3748;
     overflow-x: auto;
-    display: block;
+    display: table;
 }
 
 table tbody {
-    display: table;
+    display: table-row-group;
     width: 100%;
 }
 
